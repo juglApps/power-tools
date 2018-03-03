@@ -1,7 +1,6 @@
 {
   "name": "power-tool",
   "description": "Power Tools",
-  "directory": "app/",
   "main": "main.js",
   "authors": [
     "jgallego <julian.gallego.llergo@gmail.com>"

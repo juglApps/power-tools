@@ -1,0 +1,21 @@
+{
+  "name": "power-tool",
+  "description": "Power Tools",
+  "directory": "app/",
+  "main": "main.js",
+  "authors": [
+    "jgallego <julian.gallego.llergo@gmail.com>"
+  ],
+  "license": "JGL",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0"
+  }
+}

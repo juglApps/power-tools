@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desktop APP</title>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/components-font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="col-md-12 text-center">
+    <span class="text-danger">
+        Count Down: <span id="countDown"></span>
+    </span><br/>
+    <a href="javascript:;" class="text-warning" id="cancelAction">Cancel Action</a>
+</div>
+<!--JS Files-->
+<script>if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../js/countDown.js"></script>
+<script>if (window.module) module = window.module;</script>
+<!--End JS Files-->
+</body>
+</html>

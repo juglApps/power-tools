@@ -1,38 +1,39 @@
 console.log('Run successfully!!');
 
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
-var exec = require('child_process').exec;
-
-let win;
+// const win = require(path.join(__dirname + '/app/resources/newWindowsFunctions'));
+var indexWin;
+function createWindow() {
+    indexWin = new BrowserWindow({ backgroundColor: '#36393e', with: 600, height: 400 });
+    indexWin.loadURL(url.format({
+        pathname: path.join(__dirname, '/public/views/index.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+}
 
 app.on('ready', createWindow);
 
-function createWindow() {
-  win = new BrowserWindow({ with: 800, height: 600 });
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, '/public/views/index.html'),
-    protocol: 'file',
-    slashes: true
-  }));
-}
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+});
 
-exports.openWindow = function (callback) {
-    console.log('Apagando el equipo');
-    exec('shutdown -s -t 0', function(error, stdout, stderr){ callback(stdout); });
-};
-
-// exports.openModalConfirmShutdown = function () {
-//     win = new BrowserWindow({ with: 300, height: 100 });
-//     win.loadURL(url.format({
-//         pathname: path.join(__dirname, 'openModalConfirmShutdown.html'),
-//         protocol: 'file',
-//         slashes: true,
-//         modal:true
-//     }));
-// };
+app.on('activate', function () {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow()
+    }
+});
 
 

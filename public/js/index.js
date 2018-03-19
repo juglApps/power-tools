@@ -1,22 +1,22 @@
 const main = require('electron').remote.require('./main.js');
+const win = require('electron').remote.require('./app/resources/newWindowsFunctions');
 var isWin = process.platform === "win32";
 var isLinux = process.platform === "linux";
 
-let button = document.createElement('button');
-button.textContent = "Open Window";
-document.body.appendChild(button);
+// var button = document.createElement('button');
+// button.textContent = "Open Window";
+// document.body.appendChild(button);
 
-button.addEventListener('click', function () {
-    main.openModalConfirmShutdown();
+$(document).ready(function() {
+    $('#shutdownContent').load('./shutdown.html');
 });
 
-$('#shutdown').click(function () {
-    main.openWindow(function (out) {
 
-    });
-    // console.log('ShutDown');
-});
 
-$('#cancel').click(function () {
-    console.log('Cancel');
-});
+// button.addEventListener('click', function () {
+//     // modals.openModalConfirmShutdown();
+// });
+
+// $('#cancel').click(function () {
+//     console.log('Cancel');
+// });

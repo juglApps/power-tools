@@ -4,18 +4,42 @@
     <meta charset="UTF-8">
     <title>Desktop APP</title>
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/components-font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Works</h1>
-
-  <!--JS Files-->
-  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script>if (window.module) module = window.module;</script>
-  <script>
-    require('../js/index.js');
-  </script>
-  <!--End JS Files-->
+    <div class="col-md-12 text-center">
+        <h3 style="font-size: 35px; margin-bottom: 40px">Choose the action</h3>
+        <div class="col-md-12">
+            <div class="actions-container" id="offContainer" data-toggle="modal" data-target="#myModal">
+                <div class="col-md-12">
+                    <i class="fa fa-power-off icon-off-style"></i>
+                </div>
+                <div class="col-md-12 text-off-style">
+                    Shutdown
+                </div>
+            </div>
+            <div class="actions-container" id="rebootContainer">
+                <div class="col-md-12">
+                    <i class="fa fa-sync-alt icon-reboot-style"></i>
+                </div>
+                <div class="col-md-12 text-reboot-style">
+                    Reboot
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="shutdownContent"></div>
+    <div id="rebootContent"></div>
+    <!--JS Files-->
+    <script>if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script>if (window.module) module = window.module;</script>
+<!--End JS Files-->
 </body>
 </html>

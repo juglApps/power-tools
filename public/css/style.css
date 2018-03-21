@@ -211,7 +211,8 @@ th, td {
 }
 
 #executeSavedAction,
-#editSavedAction {
+#editSavedAction,
+#deleteSavedAction{
     color: #808080;
     cursor: pointer;
     margin-left: 20px;
@@ -223,6 +224,10 @@ th, td {
 
 #editSavedAction:hover{
     color: #FBBA00;
+}
+
+#deleteSavedAction:hover{
+    color: #F63C51;
 }
 
 /*Scroll bar*/

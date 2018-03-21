@@ -46,6 +46,7 @@ function loadSettingsSavedTable(settingsSaved) {
             html += '<td class="cell100 column4">';
             html += '<i class="fa fa-play" id="executeSavedAction" title="Execute"></i>';
             html += '<i class="fa fa-edit" id="editSavedAction" title="Edit"></i>';
+            html += '<i class="fa fa-trash" id="deleteSavedAction" title="Delete"></i>';
             html += '</td>';
         html += '</tr>';
     }

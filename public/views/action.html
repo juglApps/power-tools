@@ -3,32 +3,38 @@
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="border-radius: 0">
                 <div class="modal-body" style="color: black">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title text-center">Shutdown Settings</h3>
+                    <h3 class="modal-title text-center" id="modalTitle"></h3>
                     <form class="settings-style">
                         <div class="form-group">
-                            <label for="time">Turn off in:</label>
+                            <label for="time" id="actionLabelText"></label>
                             <div id="time" class="input-container-time">
                                 <input type="number" class="form-control input-time" id="hours" placeholder="Hours">
                                 <input type="number" class="form-control input-time" id="minutes" placeholder="Minutes">
                                 <input type="number" class="form-control input-time" id="seconds" placeholder="Seconds">
                             </div>
-                            <input type="checkbox" name="turnOffNow" id="turnOffNow"> Turn Off Now
+                            <input type="checkbox" name="turnOffNow" id="turnOffNow"><span id="turnOffNowText"></span>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button  type="button" class="btn btn-default" id="shutdownConfirm">
-                        Apply
+                <div class="modal-footer" style="justify-content: space-between;">
+                    <button type="button" class="btn btn-success" id="shutdownConfirm" style="width: 80px">
+                        <span class="buttonIcon">
+                            <i class="fa fa-check"></i>
+                        </span>
+
                     </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Cancel
+                    <button type="button" class="btn btn-danger" id="cancelButton" data-dismiss="modal"
+                            style="width: 80px">
+                        <span class="buttonIcon">
+                            <i class="fa fa-times"></i>
+                        </span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="../js/shutdown.js"></script>
+<script src="../js/action.js"></script>

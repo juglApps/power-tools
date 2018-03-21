@@ -21,8 +21,7 @@ var countDown = setInterval(function(){
 }, 1000);
 
 $('#cancelAction').click(function () {
-    methods.cancelAction(function (out) {
-        var window = remote.getCurrentWindow();
-        window.close();
-    }, action);
+    methods.cancelAction();
+    var window = remote.getCurrentWindow();
+    window.close();
 });

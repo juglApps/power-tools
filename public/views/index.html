@@ -11,7 +11,8 @@
     <div class="col-md-12 text-center">
         <h3 style="font-size: 35px; margin-bottom: 40px">Choose the action</h3>
         <div class="col-md-12">
-            <div class="actions-container" id="offContainer" data-toggle="modal" data-target="#myModal">
+            <div class="actions-container" id="offContainer" onclick="setAction('offContainer')"
+                 data-toggle="modal" data-target="#myModal">
                 <div class="col-md-12">
                     <i class="fa fa-power-off icon-off-style"></i>
                 </div>
@@ -19,7 +20,8 @@
                     Shutdown
                 </div>
             </div>
-            <div class="actions-container" id="rebootContainer">
+            <div class="actions-container" id="rebootContainer" onclick="setAction('rebootContainer')"
+                 data-toggle="modal" data-target="#myModal">
                 <div class="col-md-12">
                     <i class="fa fa-sync-alt icon-reboot-style"></i>
                 </div>
@@ -27,10 +29,19 @@
                     Reboot
                 </div>
             </div>
+            <div class="actions-container" id="signOutContainer" onclick="setAction('signOutContainer')"
+                 data-toggle="modal" data-target="#myModal">
+                <div class="col-md-12">
+                    <i class="fa fa-sign-out-alt icon-signOut-style"></i>
+                </div>
+                <div class="col-md-12 text-signOut-style">
+                    Sign Out
+                </div>
+            </div>
         </div>
     </div>
-    <div id="shutdownContent"></div>
-    <div id="rebootContent"></div>
+    <div id="modalContent"></div>
+    <!--<div id="rebootContent"></div>-->
     <!--JS Files-->
     <script>if (typeof module === 'object') {
         window.module = module;

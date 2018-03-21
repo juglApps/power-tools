@@ -11,9 +11,9 @@ body{
 }
 
 .actions-container{
-    font-size: 30px;
+    font-size: 25px;
     float: left;
-    width: 50%;
+    width: 33%;
     cursor: pointer;
 }
 
@@ -33,6 +33,14 @@ body{
     color: #007bff;
 }
 
+#signOutContainer{
+    color: #FFD500;
+}
+
+#signOutContainer:hover{
+    color: #FBBA00;
+}
+
 .input-container-time{
    width: 100%;
 }
@@ -41,4 +49,37 @@ body{
     float: left;
     width: 30%;
     margin-left: 3%;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
 }
+
+.input-time:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: black;
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0,123,255,.25);
+}
+
+/*#shutdownConfirm > .buttonText,*/
+/*#cancelButton > .buttonText{*/
+    /*visibility: hidden;*/
+/*}*/
+
+/*#shutdownConfirm > .buttonIcon,*/
+/*#cancelButton > .buttonIcon{*/
+    /*visibility: visible;*/
+/*}*/
+
+/*#shutdownConfirm:hover > .buttonText,*/
+/*#cancelButton:hover > .buttonText{*/
+    /*transition: all 0.5s;*/
+    /*visibility: visible;*/
+/*}*/
+
+/*#shutdownConfirm:hover > .buttonIcon,*/
+/*#cancelButton:hover > .buttonIcon{*/
+    /*visibility: hidden;*/
+/*}*/

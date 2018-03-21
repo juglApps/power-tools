@@ -1,5 +1,6 @@
 const methods = require('electron').remote.require('./app/resources/powerFunctions');
 const newWindows = require('electron').remote.require('./app/resources/newWindowsFunctions');
+const remote = require('electron').remote;
 
 var action = null;
 
@@ -11,10 +12,16 @@ function setContent(actionText, actionSelected) {
     $('#hours').val('');
     $('#minutes').val('');
     $('#seconds').val('');
+    if(actionSelected === 'hibernate'){
+        $('#alertActivation').show();
+    }else{
+        $('#alertActivation').hide();
+    }
 }
 
 $('#shutdownConfirm').click(function () {
     var time = 0;
+    var saveSettings = $('#saveSettings').is(':checked');
 
     if ($('#turnOffNow').is(':checked')) {
         time = 0;
@@ -22,6 +29,8 @@ $('#shutdownConfirm').click(function () {
         var hours = $('#hours').val();
         var minutes = $('#minutes').val();
         var seconds = $('#seconds').val();
+        var nameSetting = $('#nameSetting').val();
+
         if (hours) {
             time += hours * 3600;
         }
@@ -37,10 +46,18 @@ $('#shutdownConfirm').click(function () {
     newWindows.openCountDown();
 
     methods.execAction(function (out) {
-    }, time, action);
+        console.log(out);
+    }, time, action, saveSettings, nameSetting);
+    remote.getCurrentWindow().reload();
 });
 
-
+$('#saveSettings').click(function () {
+    if($(this).is(':checked')){
+        $('#nameSettingContainer').fadeIn();
+    }else{
+        $('#nameSettingContainer').fadeOut();
+    }
+});
 
 $('#turnOffNow').click(function () {
     if ($('#turnOffNow').is(':checked')) {

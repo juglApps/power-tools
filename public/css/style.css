@@ -2,50 +2,59 @@
     font-family: nunitoSansLight;
     src: url(../fonts/nunitoSans/NunitoSans-Light.ttf);
 }
-body{
+
+body {
     padding: 1%;
     margin-top: 4%;
     color: white;
-    background: #36393e;
+    background: #222222;
     font-family: "nunitoSansLight";
 }
 
-.actions-container{
+.actions-container {
     font-size: 25px;
     float: left;
-    width: 33%;
+    width: 25%;
     cursor: pointer;
 }
 
-#offContainer{
+#offContainer {
     color: #f67280;
 }
 
-#offContainer:hover{
+#offContainer:hover {
     color: #F63C51;
 }
 
-#rebootContainer{
+#rebootContainer {
     color: #17a2b8;
 }
 
-#rebootContainer:hover{
+#rebootContainer:hover {
     color: #007bff;
 }
 
-#signOutContainer{
+#signOutContainer {
+    color: #28a745;
+}
+
+#signOutContainer:hover {
+    color: #218838;
+}
+
+#hibernateContainer {
     color: #FFD500;
 }
 
-#signOutContainer:hover{
+#hibernateContainer:hover {
     color: #FBBA00;
 }
 
-.input-container-time{
-   width: 100%;
+.input-container-time {
+    width: 100%;
 }
 
-.input-time{
+.input-time {
     float: left;
     width: 30%;
     margin-left: 3%;
@@ -60,26 +69,171 @@ body{
     background-color: #fff;
     border-color: black;
     outline: 0;
-    box-shadow: 0 0 0 0 rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, .25);
 }
 
-/*#shutdownConfirm > .buttonText,*/
-/*#cancelButton > .buttonText{*/
-    /*visibility: hidden;*/
-/*}*/
+.input-name {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
 
-/*#shutdownConfirm > .buttonIcon,*/
-/*#cancelButton > .buttonIcon{*/
-    /*visibility: visible;*/
-/*}*/
+.input-name:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: black;
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, .25);
+}
 
-/*#shutdownConfirm:hover > .buttonText,*/
-/*#cancelButton:hover > .buttonText{*/
-    /*transition: all 0.5s;*/
-    /*visibility: visible;*/
-/*}*/
+#nameSettingContainer {
+    display: none;
+}
 
-/*#shutdownConfirm:hover > .buttonIcon,*/
-/*#cancelButton:hover > .buttonIcon{*/
-    /*visibility: hidden;*/
-/*}*/
+#alertActivation {
+    display: none;
+}
+
+#tableContainer {
+    margin-top: 100px;
+}
+
+/*table*/
+.table100.ver3 {
+    background-color: #393939;
+}
+
+.table100 {
+    background-color: #fff;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    font-weight: unset;
+    padding-right: 10px;
+}
+
+.column1 {
+    width: 33%;
+    padding-left: 40px;
+}
+
+.column2 {
+    width: 13%;
+}
+
+.column3 {
+    width: 22%;
+}
+
+.column4 {
+    width: 19%;
+}
+
+.column5 {
+    width: 13%;
+}
+
+.table100-head th {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.table100-body td {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/*[ Fix header ]*/
+.table100 {
+    position: relative;
+    padding-top: 60px;
+}
+
+.table100-head {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.table100-body {
+    max-height: 585px;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 200px;
+}
+
+.table100.ver3 th {
+    font-family: "nunitoSansLight";
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: #393939;
+}
+
+.table100.ver3 td {
+    font-family: "nunitoSansLight";
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.4;
+    background-color: #222222;
+}
+
+/*---------------------------------------------*/
+
+.table100.ver3 {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+}
+
+.table100.ver3 .ps__rail-y {
+    right: 5px;
+}
+
+.table100.ver3 .ps__rail-y::before {
+    background-color: #4e4e4e;
+}
+
+.table100.ver3 .ps__rail-y .ps__thumb-y::before {
+    background-color: #00ad5f;
+}
+
+#executeSavedAction,
+#editSavedAction {
+    color: #808080;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#executeSavedAction:hover{
+    color: #218838;
+}
+
+#editSavedAction:hover{
+    color: #FBBA00;
+}
+
+/*Scroll bar*/
+::-webkit-scrollbar-thumb {
+    background-color: white;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222222;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}

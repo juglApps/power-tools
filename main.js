@@ -9,7 +9,7 @@ const url = require('url');
 // const win = require(path.join(__dirname + '/app/resources/newWindowsFunctions'));
 var indexWin;
 function createWindow() {
-    indexWin = new BrowserWindow({ backgroundColor: '#36393e', with: 600, height: 400 });
+    indexWin = new BrowserWindow({ backgroundColor: '#36393e', with: 600, height: 600 });
     indexWin.loadURL(url.format({
         pathname: path.join(__dirname, '/public/views/index.html'),
         protocol: 'file',

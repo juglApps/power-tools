@@ -13,4 +13,5 @@ exports.openCountDown = function () {
         slashes: true
     }));
     win.setAlwaysOnTop(true);
+    // win.webContents.openDevTools();
 };

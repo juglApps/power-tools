@@ -4,11 +4,32 @@
 }
 
 body {
-    padding: 1%;
-    margin-top: 4%;
+    padding: 2%;
     color: white;
     background: #222222;
     font-family: "nunitoSansLight";
+    -ms-overflow-style: scrollbar;
+    -webkit-app-region:drag;
+}
+
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="text"],
+a,
+div,
+button,
+textarea {
+    -webkit-app-region: no-drag;
+}
+
+#closeMinContainer{
+    -webkit-app-region:drag;
+}
+
+#minimizeIcon,
+#closeIcon{
+    color: white!important;
 }
 
 .actions-container {
@@ -162,10 +183,9 @@ th, td {
 }
 
 .table100-body {
-    max-height: 585px;
+    max-height: 200px;
     overflow: hidden;
     overflow-y: scroll;
-    height: 200px;
 }
 
 .table100.ver3 th {

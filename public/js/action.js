@@ -1,6 +1,6 @@
-const methods = require('electron').remote.require('./app/resources/powerFunctions');
+var methods = require('electron').remote.require('./app/resources/powerFunctions');
 const newWindows = require('electron').remote.require('./app/resources/newWindowsFunctions');
-const remote = require('electron').remote;
+var remote = require('electron').remote;
 
 var action = null;
 
@@ -44,12 +44,20 @@ $('#shutdownConfirm').click(function () {
     localStorage.setItem('time', time.toString());
 
     newWindows.openCountDown();
+    remote.BrowserWindow.getFocusedWindow().minimize();
 
     methods.execAction(function (out) {
         console.log(out);
     }, time, action, saveSettings, nameSetting);
     remote.getCurrentWindow().reload();
+    refreshSettingSaved();
 });
+
+function refreshSettingSaved() {
+    $.getJSON('../../settingsSaved.json', function (data) {
+        $('#tableContainer').html(methods.loadSettingsSavedTable(data));
+    });
+}
 
 $('#saveSettings').click(function () {
     if($(this).is(':checked')){

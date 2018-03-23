@@ -1,6 +1,8 @@
 console.log('Run successfully!!');
 
 const electron = require('electron');
+var constants = require('./app/lib/constants');
+
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -8,13 +10,23 @@ const path = require('path');
 const url = require('url');
 // const win = require(path.join(__dirname + '/app/resources/newWindowsFunctions'));
 var indexWin;
+
 function createWindow() {
-    indexWin = new BrowserWindow({ backgroundColor: '#36393e', with: 600, height: 600 });
+    indexWin = new BrowserWindow({
+        backgroundColor: '#222222', with: 600, height: 600, show: false,frame: false,
+        resizable: false,
+    });
     indexWin.loadURL(url.format({
         pathname: path.join(__dirname, '/public/views/index.html'),
         protocol: 'file',
         slashes: true
     }));
+    indexWin.once('ready-to-show', function () {
+        indexWin.show();
+    });
+    if(!constants.PRODUCTION){
+        indexWin.webContents.openDevTools();
+    }
 }
 
 app.on('ready', createWindow);

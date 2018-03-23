@@ -8,7 +8,11 @@
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="col-md-12 text-center">
+    <div id="closeMinContainer"  style="display: flex;justify-content: space-between;width: 100%;color: white">
+        <a href="javascript:;" style="text-decoration: none" id="minimizeIcon"><i class="fa fa-minus"></i></a>
+        <a href="javascript:;" style="text-decoration: none" id="closeIcon"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top: 4%;">
         <h3 style="font-size: 35px; margin-bottom: 40px">Choose the action</h3>
         <div class="col-md-12">
             <div class="actions-container" id="offContainer" onclick="setAction('offContainer')"

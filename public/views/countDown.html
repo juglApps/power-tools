@@ -7,8 +7,12 @@
     <link href="../bower_components/components-font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
-<body>
-<div class="col-md-12 text-center">
+<body style="padding: 2%">
+<div id="closeMinContainer" style="display: flex;justify-content: space-between;width: 100%;color: white;padding: 5px;">
+    <a href="javascript:;" style="text-decoration: none" id="minimizeIcon"><i class="fa fa-minus"></i></a>
+    <a href="javascript:;" style="text-decoration: none" id="closeIcon"><i class="fa fa-times"></i></a>
+</div>
+<div class="col-md-12 text-center" style="margin-top: 4%">
     <span class="text-danger">
         Count Down: <span id="countDown"></span>
     </span><br/>

@@ -1,5 +1,6 @@
 var methods = require('electron').remote.require('./app/resources/powerFunctions');
 var remote = require('electron').remote;
+var main = require('electron').remote.require('./main');
 
 var time = parseInt(localStorage.getItem('time'));
 var action = localStorage.getItem('action');
@@ -35,6 +36,7 @@ $('#cancelAction').click(function () {
     methods.cancelAction();
     var window = remote.getCurrentWindow();
     window.close();
+    main.createWindow();
 });
 
 $('#closeIcon').click(function () {

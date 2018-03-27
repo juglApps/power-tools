@@ -1,5 +1,5 @@
 var methods = require('electron').remote.require('./app/resources/powerFunctions');
-const newWindows = require('electron').remote.require('./app/resources/newWindowsFunctions');
+var newWindows = require('electron').remote.require('./app/resources/newWindowsFunctions');
 var remote = require('electron').remote;
 
 var action = null;
@@ -66,7 +66,7 @@ function shutdownConfirmClick(index) {
         localStorage.setItem('activeCount', 'activated');
 
         newWindows.openCountDown();
-        // remote.BrowserWindow.getFocusedWindow().minimize();
+        remote.BrowserWindow.getFocusedWindow().close();
 
         methods.execAction(function (out) {
             if(out === 'Done'){
@@ -81,9 +81,8 @@ function shutdownConfirmClick(index) {
 }
 
 function refreshSettingSaved() {
-    $.getJSON('../../settingsSaved.json', function (data) {
-        $('#tableContainer').html(methods.loadSettingsSavedTable(data));
-    });
+    var file = methods.getJsonFile();
+    $('#tableContainer').html(methods.loadSettingsSavedTable(file));
 }
 
 function saveSettingsClick() {

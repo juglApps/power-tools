@@ -15,7 +15,8 @@ exports.openCountDown = function () {
         resizable: false,
         transparent: true,
         backgroundColor: '#222222',
-        show: false
+        show: false,
+        fullscreen: false
     });
     win.loadURL(url.format({
         pathname: path.join(__dirname, '../../public/views/countDown.html'),
@@ -29,4 +30,5 @@ exports.openCountDown = function () {
     win.once('ready-to-show', function () {
         win.show();
     });
+    win.setPosition(50,50,true);
 };

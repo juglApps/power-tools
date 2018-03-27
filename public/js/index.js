@@ -1,5 +1,6 @@
 const main = require('electron').remote.require('./main.js');
 const win = require('electron').remote.require('./app/resources/newWindowsFunctions');
+var newWindows = require('electron').remote.require('./app/resources/newWindowsFunctions');
 var methods = require('electron').remote.require('./app/resources/powerFunctions');
 // const remote = require('electron').remote;
 var remote = require('electron').remote;
@@ -23,10 +24,15 @@ $('#minimizeIcon').click(function () {
 });
 
 function getSettingsSaved() {
-    var file = methods.getJsonFile();
-    if (file.length > 0) {
-        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
-    } else {
+    var settingsFileExist = methods.existSettingsFile();
+    if(settingsFileExist){
+        var file = methods.getJsonFile();
+        if (file.length > 0) {
+            $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+        } else {
+            $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
+        }
+    }else{
         $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
     }
 }
@@ -34,11 +40,16 @@ function getSettingsSaved() {
 function loadAction(index){
     var activeCount = localStorage.getItem('activeCount');
     if(activeCount !== 'activated'){
-        $('#myModal').modal('show');
         var file = methods.getJsonFile();
-        file.splice(index,1);
-        methods.deleteSetting(file);
-        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+        var settingsSaved = file[index];
+        localStorage.setItem('time', settingsSaved['time'].toString());
+        localStorage.setItem('action', settingsSaved['action']);
+        localStorage.setItem('activeCount', 'activated');
+
+        newWindows.openCountDown();
+        remote.BrowserWindow.getFocusedWindow().close();
+
+        methods.execAction(function (out) {}, settingsSaved['time'], settingsSaved['action'], false, null, index);
     }
 }
 
@@ -68,7 +79,11 @@ function deleteAction(index){
         var file = methods.getJsonFile();
         file.splice(index,1);
         methods.deleteSetting(file);
-        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+        if (file.length > 0) {
+            $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+        } else {
+            $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
+        }
     }
 }
 

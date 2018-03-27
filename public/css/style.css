@@ -71,6 +71,7 @@ a:hover{
     text-transform: capitalize;
     padding: 1%;
     -webkit-app-region:drag;
+    cursor: move
 }
 
 #offContainer {

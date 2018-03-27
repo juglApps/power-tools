@@ -3,7 +3,7 @@ var fs = require('fs');
 
 var actionInProgress = null;
 
-exports.execAction = function (callback, time, action, saveSettings, nameSetting) {
+exports.execAction = function (callback, time, action, saveSettings, nameSetting, index) {
     console.log('Apagando el equipo');
     switch (action) {
         // case 'shutdown':
@@ -20,8 +20,10 @@ exports.execAction = function (callback, time, action, saveSettings, nameSetting
         //     break;
     }
 
-    if(saveSettings){
-        saveFileSettings(time, nameSetting, action);
+    if (saveSettings) {
+        saveFileSettings(time, nameSetting, action, index, function (out) {
+            callback(out);
+        });
     }
 };
 
@@ -38,28 +40,38 @@ exports.deleteSetting = function (file) {
 };
 
 function execute(callback, time, action) {
-    if(time !== 0){
+    if (time !== 0) {
         actionInProgress = setTimeout(function () {
             exec(action, function (error, stdout, stderr) {
                 callback(stdout);
             });
         }, time * 1000);
-    }else{
+    } else {
         exec(action, function (error, stdout, stderr) {
             callback(stdout);
         });
     }
 }
 
-function saveFileSettings(time, nameSetting, action) {
+function saveFileSettings(time, nameSetting, action, index, callback) {
     var JsonFile = getJsonFile();
     var fileArray = JsonFile ? JsonFile : [];
-    fileArray.push({
-        'name': nameSetting,
-        'time': time,
-        'action': action
-    });
+    if(index === 0 || index > 0){
+        fileArray[index] = {
+            'name': nameSetting,
+            'time': time,
+            'action': action
+        }
+    }else{
+        fileArray.push({
+            'name': nameSetting,
+            'time': time,
+            'action': action
+        });
+    }
+
     fs.writeFile("settingsSaved.json", JSON.stringify(fileArray));
+    callback('Done');
 }
 
 function getJsonFile() {
@@ -91,14 +103,17 @@ exports.loadSettingsSavedTable = function (settingsSaved) {
     html += '<table>';
     html += '<tbody>';
     for (var i = 0; i < settingsSaved.length; i++) {
+
+        var time = this.getTime(settingsSaved[i]['time']);
+
         html += '<tr class="row100 body">';
         html += '<td class="cell100 column1">' + settingsSaved[i]['name'] + '</td>';
-        html += '<td class="cell100 column2">' + settingsSaved[i]['time'] + '</td>';
+        html += '<td class="cell100 column2">' + time['string'] + '</td>';
         html += '<td class="cell100 column3">' + settingsSaved[i]['action'] + '</td>';
         html += '<td class="cell100 column4">';
-        html += '<i class="fa fa-play" id="executeSavedAction" title="Execute"></i>';
-        html += '<i class="fa fa-edit" id="editSavedAction" title="Edit"></i>';
-        html += '<i class="fa fa-trash" id="deleteSavedAction" onclick="deleteAction(' + i + ')" title="Delete"></i>';
+        html += '<i class="fa fa-play executeSavedAction" onmouseover="check($(this))" id="executeSavedAction' + i + '" title="Execute"></i>';
+        html += '<i class="fa fa-edit editSavedAction" onmouseover="check($(this))" id="editSavedAction' + i + '" onclick="editAction(' + i + ')" title="Edit"></i>';
+        html += '<i class="fa fa-trash deleteSavedAction" onmouseover="check($(this))" id="deleteSavedAction' + i + '" onclick="deleteAction(' + i + ')" title="Delete"></i>';
         html += '</td>';
         html += '</tr>';
     }
@@ -107,4 +122,29 @@ exports.loadSettingsSavedTable = function (settingsSaved) {
     html += '</div>';
 
     return html;
+};
+
+exports.getTime = function (time){
+    var hours = Math.floor(time / 3600);
+    var minutes = Math.floor((time % 3600) / 60);
+    var seconds = time % 60;
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return {
+        'hours': hours,
+        'minutes': minutes,
+        'seconds': seconds,
+        'string': hours + ":" + minutes + ":" + seconds
+    };
+};
+
+exports.getJsonFile = function () {
+    var JsonFile = null;
+    if (fs.existsSync('settingsSaved.json')) {
+        JsonFile = JSON.parse(fs.readFileSync('settingsSaved.json', 'utf8'));
+    }
+    return JsonFile;
 };

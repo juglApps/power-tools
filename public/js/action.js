@@ -4,54 +4,81 @@ var remote = require('electron').remote;
 
 var action = null;
 
-function setContent(actionText, actionSelected) {
+function setContent(actionText, actionSelected, settingsSaved, timeObj, index) {
     action = actionSelected;
     $('#modalTitle').html(actionText + ' Settings');
     $('#actionLabelText').html(actionText + ' in:');
     $('#turnOffNowText').html(' ' + actionText + ' Now');
-    $('#hours').val('');
-    $('#minutes').val('');
-    $('#seconds').val('');
-    if(actionSelected === 'hibernate'){
+    $('#hours').val(timeObj && timeObj['hours'] !== 0 ? timeObj['hours'] : '');
+    $('#minutes').val(timeObj && timeObj['minutes'] !== '00' ? timeObj['minutes'] : '');
+    $('#seconds').val(timeObj && timeObj['seconds'] !== '00' ? timeObj['seconds'] : '');
+
+    if (settingsSaved) {
+        $('#buttonConfirmContainer').html('<button type="button" class="btn btn-success" onclick="shutdownConfirmClick(' + index + ')" id="shutdownConfirm" style="width: 80px">\n' +
+            '                        <span class="buttonIcon">\n' +
+            '                            <i class="fa fa-check"></i>\n' +
+            '                        </span>\n' +
+            '                    </button>');
+        $('#saveSettings').prop("checked", true);
+        $('#nameSettingContainer').show();
+        $('#nameSetting').val(settingsSaved['name']);
+    } else {
+        $('#buttonConfirmContainer').html('<button type="button" class="btn btn-success" onclick="shutdownConfirmClick()" id="shutdownConfirm" style="width: 80px">\n' +
+            '                        <span class="buttonIcon">\n' +
+            '                            <i class="fa fa-check"></i>\n' +
+            '                        </span>\n' +
+            '                    </button>');
+    }
+
+    if (actionSelected === 'hibernate') {
         $('#alertActivation').show();
-    }else{
+    } else {
         $('#alertActivation').hide();
     }
 }
 
-$('#shutdownConfirm').click(function () {
-    var time = 0;
-    var saveSettings = $('#saveSettings').is(':checked');
+function shutdownConfirmClick(index) {
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount === 'noActivated'){
+        var time = 0;
+        var saveSettings = $('#saveSettings').is(':checked');
 
-    if ($('#turnOffNow').is(':checked')) {
-        time = 0;
-    } else {
-        var hours = $('#hours').val();
-        var minutes = $('#minutes').val();
-        var seconds = $('#seconds').val();
-        var nameSetting = $('#nameSetting').val();
+        if ($('#turnOffNow').is(':checked')) {
+            time = 0;
+        } else {
+            var hours = $('#hours').val();
+            var minutes = $('#minutes').val();
+            var seconds = $('#seconds').val();
+            var nameSetting = $('#nameSetting').val();
 
-        if (hours) {
-            time += hours * 3600;
+            if (hours) {
+                time += hours * 3600;
+            }
+            if (minutes) {
+                time += minutes * 60;
+            }
+            if (seconds) {
+                time += seconds * 1;
+            }
         }
-        if (minutes) {
-            time += minutes * 60;
-        }
-        if (seconds) {
-            time += seconds * 1;
-        }
+        localStorage.setItem('time', time.toString());
+        localStorage.setItem('action', action);
+        localStorage.setItem('activeCount', 'activated');
+
+        newWindows.openCountDown();
+        // remote.BrowserWindow.getFocusedWindow().minimize();
+
+        methods.execAction(function (out) {
+            if(out === 'Done'){
+                refreshSettingSaved();
+            }
+        }, time, action, saveSettings, nameSetting, index);
+        // remote.getCurrentWindow().reload();
+
+
+        $('#myModal').modal('toggle');
     }
-    localStorage.setItem('time', time.toString());
-
-    newWindows.openCountDown();
-    remote.BrowserWindow.getFocusedWindow().minimize();
-
-    methods.execAction(function (out) {
-        console.log(out);
-    }, time, action, saveSettings, nameSetting);
-    remote.getCurrentWindow().reload();
-    refreshSettingSaved();
-});
+}
 
 function refreshSettingSaved() {
     $.getJSON('../../settingsSaved.json', function (data) {
@@ -59,15 +86,15 @@ function refreshSettingSaved() {
     });
 }
 
-$('#saveSettings').click(function () {
-    if($(this).is(':checked')){
+function saveSettingsClick() {
+    if ($('#saveSettings').is(':checked')) {
         $('#nameSettingContainer').fadeIn();
-    }else{
+    } else {
         $('#nameSettingContainer').fadeOut();
     }
-});
+}
 
-$('#turnOffNow').click(function () {
+function turnOffNowClick() {
     if ($('#turnOffNow').is(':checked')) {
         $('#hours').attr('disabled', 'disabled');
         $('#minutes').attr('disabled', 'disabled');
@@ -77,4 +104,4 @@ $('#turnOffNow').click(function () {
         $('#minutes').removeAttr('disabled');
         $('#seconds').removeAttr('disabled');
     }
-});
+}

@@ -10,7 +10,7 @@ var win;
 exports.openCountDown = function () {
     win = new BrowserWindow({
         width: 200,
-        height: 300,
+        height: 100,
         frame: false,
         resizable: false,
         transparent: true,

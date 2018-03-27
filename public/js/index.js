@@ -9,6 +9,7 @@ var isLinux = process.platform === "linux";
 
 $(document).ready(function () {
     $('#modalContent').load('./action.html');
+    localStorage.setItem('activeCount', 'noActivated');
     getSettingsSaved();
 });
 
@@ -22,53 +23,76 @@ $('#minimizeIcon').click(function () {
 });
 
 function getSettingsSaved() {
-    $.getJSON('../../settingsSaved.json', function (data) {
-        if (data.length > 0) {
-            $('#tableContainer').html(methods.loadSettingsSavedTable(data));
-        } else {
-            $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
-        }
-    });
+    var file = methods.getJsonFile();
+    if (file.length > 0) {
+        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+    } else {
+        $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
+    }
+}
+
+function loadAction(index){
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount !== 'activated'){
+        $('#myModal').modal('show');
+        var file = methods.getJsonFile();
+        file.splice(index,1);
+        methods.deleteSetting(file);
+        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+    }
+}
+
+function editAction(index){
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount !== 'activated'){
+        $('#myModal').modal('show');
+        var file = methods.getJsonFile();
+        var settingsSaved = file[index];
+        var timeObj = methods.getTime(settingsSaved['time']);
+        setAction(settingsSaved['action'], settingsSaved, timeObj, index);
+    }
+}
+
+function check(node) {
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount === 'activated'){
+        node.css('cursor','not-allowed');
+    }else{
+        node.css('cursor','pointer');
+    }
 }
 
 function deleteAction(index){
-    $.getJSON('../../settingsSaved.json', function (data) {
-        var file = data;
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount !== 'activated'){
+        var file = methods.getJsonFile();
         file.splice(index,1);
         methods.deleteSetting(file);
-        $('#tableContainer').html(loadSettingsSavedTable(file));
-    });
+        $('#tableContainer').html(methods.loadSettingsSavedTable(file));
+    }
 }
 
-// $('#deleteSavedAction').click(function () {
-//     methods.deleteSetting($('#deleteSavedAction').data('index'));
-//     remote.getCurrentWindow().reload();
-// });
-
-function setAction(id) {
-    localStorage.removeItem('action');
-    switch (id) {
-        case 'offContainer':
-            // localStorage.setItem('action', 'shutdown');
-            setContent('Shutdown', 'shutdown');
-            break;
-        case 'rebootContainer':
-            // localStorage.setItem('action', 'reboot');
-            setContent('Reboot', 'reboot');
-            break;
-        case 'signOutContainer':
-            // localStorage.setItem('action', 'signOut');
-            setContent('Sign Out', 'signOut');
-            break;
-        case 'hibernateContainer':
-            // localStorage.setItem('action', 'signOut');
-            setContent('Hibernate', 'hibernate');
-            break;
-        // case 'shutdownAction':
-        //     break;
-        // case 'shutdownAction':
-        //     break;
-        // case 'shutdownAction':
-        //     break;
+function setAction(id, settingsSaved, timeObj, index) {
+    var activeCount = localStorage.getItem('activeCount');
+    if(activeCount !== 'activated'){
+        $('#myModal').modal('show');
+        switch (id) {
+            case 'offContainer':
+            case 'shutdown':
+                setContent('Shutdown', 'shutdown', settingsSaved, timeObj, index);
+                break;
+            case 'rebootContainer':
+            case 'reboot':
+                setContent('Reboot', 'reboot', settingsSaved, timeObj, index);
+                break;
+            case 'signOutContainer':
+            case 'signOut':
+                setContent('Sign Out', 'signOut', settingsSaved, timeObj, index);
+                break;
+            case 'hibernateContainer':
+            case 'hibernate':
+                setContent('Hibernate', 'hibernate', settingsSaved, timeObj, index);
+                break;
+        }
     }
 }

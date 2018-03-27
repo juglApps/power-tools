@@ -17,10 +17,10 @@
                             </div>
                             <div style="width: 100%">
                                 <div style="margin-left: 20px;">
-                                    <input type="checkbox" name="turnOffNow" id="turnOffNow"><span id="turnOffNowText"></span>
+                                    <input type="checkbox" onclick="turnOffNowClick()" name="turnOffNow" id="turnOffNow"><span id="turnOffNowText"></span>
                                 </div>
                                 <div style="margin-left: 20px;">
-                                    <input type="checkbox" name="saveSettings" id="saveSettings"> Save Settings?
+                                    <input type="checkbox" onclick="saveSettingsClick()" name="saveSettings" id="saveSettings"> Save Settings?
                                 </div>
                             </div>
                         </div>
@@ -32,16 +32,16 @@
                         </div>
                     </form>
                     <div class="alert alert-info" id="alertActivation">
-                        If you don't have activated the hibernate function, this function will not work
+                        If you don't have activated the hibernate option in your Operating System, this function will not work
                     </div>
                 </div>
                 <div class="modal-footer" style="justify-content: space-between;">
-                    <button type="button" class="btn btn-success" id="shutdownConfirm" style="width: 80px">
-                        <span class="buttonIcon">
-                            <i class="fa fa-check"></i>
-                        </span>
-
-                    </button>
+                    <div id="buttonConfirmContainer"></div>
+                    <!--<button type="button" class="btn btn-success" onclick="shutdownConfirmClick(true)" id="updateButtonConfirm" style="width: 80px;display:none">-->
+                        <!--<span class="buttonIcon">-->
+                            <!--<i class="fa fa-check"></i>-->
+                        <!--</span>-->
+                    <!--</button>-->
                     <button type="button" class="btn btn-danger" id="cancelButton" data-dismiss="modal"
                             style="width: 80px">
                         <span class="buttonIcon">
@@ -53,4 +53,3 @@
         </div>
     </div>
 </div>
-<script src="../js/action.js"></script>

@@ -4,24 +4,29 @@
 }
 
 body {
-    padding: 2%;
+    /*padding: 2%;*/
     color: white;
     background: #222222;
     font-family: "nunitoSansLight";
     -ms-overflow-style: scrollbar;
-    -webkit-app-region:drag;
+    /*-webkit-app-region:drag;*/
 }
 
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
 input[type="text"],
+input[type="checkbox"],
 a,
 div,
 button,
 textarea {
     -webkit-app-region: no-drag;
 }
+
+/*#full-container {*/
+    /*-webkit-app-region: no-drag;*/
+/*}*/
 
 #closeMinContainer{
     -webkit-app-region:drag;
@@ -37,6 +42,35 @@ textarea {
     float: left;
     width: 25%;
     cursor: pointer;
+}
+
+#cancelAction{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    bottom: 0;
+    padding: 1%;
+    font-size: 20px;
+    background: #222222;
+    text-decoration: none;
+    border-top: 2px #d39e00 solid;
+}
+
+a{
+    color: #d39e00;
+}
+a:hover{
+    color: white;
+}
+
+#countDown{
+    position: absolute;
+    width: 100%;
+    font-size: 25px;
+    line-height: 30px;
+    text-transform: capitalize;
+    padding: 1%;
+    -webkit-app-region:drag;
 }
 
 #offContainer {
@@ -230,23 +264,23 @@ th, td {
     background-color: #00ad5f;
 }
 
-#executeSavedAction,
-#editSavedAction,
-#deleteSavedAction{
+.executeSavedAction,
+.editSavedAction,
+.deleteSavedAction{
     color: #808080;
     cursor: pointer;
     margin-left: 20px;
 }
 
-#executeSavedAction:hover{
+.executeSavedAction:hover{
     color: #218838;
 }
 
-#editSavedAction:hover{
+.editSavedAction:hover{
     color: #FBBA00;
 }
 
-#deleteSavedAction:hover{
+.deleteSavedAction:hover{
     color: #F63C51;
 }
 

@@ -7,23 +7,26 @@
     <link href="../bower_components/components-font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
-<body style="padding: 2%">
-<div id="closeMinContainer" style="display: flex;justify-content: space-between;width: 100%;color: white;padding: 5px;">
-    <a href="javascript:;" style="text-decoration: none" id="minimizeIcon"><i class="fa fa-minus"></i></a>
-    <a href="javascript:;" style="text-decoration: none" id="closeIcon"><i class="fa fa-times"></i></a>
-</div>
-<div class="col-md-12 text-center" style="margin-top: 4%">
-    <span class="text-danger">
-        Count Down: <span id="countDown"></span>
-    </span><br/>
-    <a href="javascript:;" class="text-warning" id="cancelAction">Cancel Action</a>
+<body style="padding: 0;">
+<!--<div id="closeMinContainer" style="display: flex;justify-content: space-between;width: 100%;color: white;padding: 5px;">-->
+    <!--<a href="javascript:;" style="text-decoration: none" id="minimizeIcon"><i class="fa fa-minus"></i></a>-->
+    <!--<a href="javascript:;" style="text-decoration: none" id="closeIcon"><i class="fa fa-times"></i></a>-->
+<!--</div>-->
+<div class="text-center" style="width: 100%;-webkit-app-region:drag">
+    <div class="progress" style="height: 100px; border-radius: 0;background: #222222">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0"
+             aria-valuemin="0" aria-valuemax="0" style="width:0; background-color: #393939">
+        </div>
+        <div id="countDown"></div>
+        <a href="javascript:;" id="cancelAction">Cancel Action</a>
+    </div>
 </div>
 <!--JS Files-->
 <script>if (typeof module === 'object') {
     window.module = module;
     module = undefined;
 }</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../js/countDown.js"></script>
 <script>if (window.module) module = window.module;</script>

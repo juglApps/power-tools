@@ -8,22 +8,8 @@ exports.execAction = function (callback, time, action, saveSettings, nameSetting
     if (saveSettings) {
         saveFileSettings(time, nameSetting, action, index, function (out) {
             callback(out);
-            switch (action) {
-                case 'shutdown':
-                    execute(callback, time, 'shutdown -s -f -t 0');
-                    break;
-                case 'reboot':
-                    execute(callback, time, 'shutdown -r -f -t 0');
-                    break;
-                case 'signOut':
-                    execute(callback, time, 'shutdown -L -f');
-                    break;
-                case 'hibernate':
-                    execute(callback, time, 'shutdown -h -f -t 0');
-                    break;
-            }
         });
-    }else{
+    } else {
         switch (action) {
             case 'shutdown':
                 execute(callback, time, 'shutdown -s -f -t 0');
@@ -67,25 +53,57 @@ function execute(callback, time, action) {
 }
 
 function saveFileSettings(time, nameSetting, action, index, callback) {
-        var JsonFile = getJsonFile();
-        var path = './settingsSaved.json';
-        var fileArray = JsonFile ? JsonFile : [];
-        if(index === 0 || index > 0){
-            fileArray[index] = {
-                'name': nameSetting,
-                'time': time,
-                'action': action
+    var JsonFile = getJsonFile();
+    var path = './settingsSaved.json';
+    var fileArray = JsonFile ? JsonFile : [];
+    if (index === 0 || index > 0) {
+        fileArray[index] = {
+            'name': nameSetting,
+            'time': time,
+            'action': action
+        }
+    } else {
+        fileArray.push({
+            'name': nameSetting,
+            'time': time,
+            'action': action
+        });
+    }
+    runCommand(path, fileArray, action, time, function (out) {
+        callback(out);
+    });
+}
+
+function runCommand(path, fileArray, action, time, callback) {
+    fs.writeFile(path, JSON.stringify(fileArray), function (err) {
+        if (err) {
+            callback(err);
+        } else {
+            switch (action) {
+                case 'shutdown':
+                    execute(function () {
+                        callback('Done');
+                    }, time, 'shutdown -s -f -t 0');
+                    break;
+                case 'reboot':
+                    execute(function () {
+                        callback('Done');
+                    }, time, 'shutdown -r -f -t 0');
+                    break;
+                case 'signOut':
+                    execute(function () {
+                        callback('Done');
+                    }, time, 'shutdown -L -f');
+                    break;
+                case 'hibernate':
+                    execute(function () {
+                        callback('Done');
+                    }, time, 'shutdown -h -f -t 0');
+                    break;
             }
-        }else{
-            fileArray.push({
-                'name': nameSetting,
-                'time': time,
-                'action': action
-            });
         }
 
-        fs.writeFile(path, JSON.stringify(fileArray));
-        callback('Done');
+    });
 }
 
 function getJsonFile() {
@@ -139,7 +157,7 @@ exports.loadSettingsSavedTable = function (settingsSaved) {
     return html;
 };
 
-exports.getTime = function (time){
+exports.getTime = function (time) {
     var hours = Math.floor(time / 3600);
     var minutes = Math.floor((time % 3600) / 60);
     var seconds = time % 60;

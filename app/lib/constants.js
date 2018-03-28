@@ -1,3 +1,3 @@
 module.exports = Object.freeze({
-    PRODUCTION: false
+    PRODUCTION: true
 });

@@ -42,15 +42,14 @@ function shutdownConfirmClick(index) {
     if(activeCount === 'noActivated'){
         var time = 0;
         var saveSettings = $('#saveSettings').is(':checked');
+        var hours = $('#hours').val();
+        var minutes = $('#minutes').val();
+        var seconds = $('#seconds').val();
+        var nameSetting = $('#nameSetting').val();
 
         if ($('#turnOffNow').is(':checked')) {
             time = 0;
         } else {
-            var hours = $('#hours').val();
-            var minutes = $('#minutes').val();
-            var seconds = $('#seconds').val();
-            var nameSetting = $('#nameSetting').val();
-
             if (hours) {
                 time += hours * 3600;
             }
@@ -75,8 +74,6 @@ function shutdownConfirmClick(index) {
                 refreshSettingSaved();
             }
         }, time, action, saveSettings, nameSetting, index);
-        // remote.getCurrentWindow().reload();
-
 
         $('#myModal').modal('toggle');
     }

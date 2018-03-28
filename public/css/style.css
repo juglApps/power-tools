@@ -297,3 +297,55 @@ th, td {
 ::-webkit-scrollbar {
     width: 6px;
 }
+
+/*LOGO ANIMATION*/
+
+.loader {
+    height: calc(100vh);
+    text-align: center;
+    width: 100%;
+    font-size: 60px;
+    padding: 25% 40% 0 40%;
+}
+
+.icon-off-loader-style{
+    animation: spin 1s linear infinite;
+}
+.icon-reboot-loader-style{
+    animation: spin2 1s linear infinite;
+}
+.icon-signOut-loader-style{
+    animation: spin3 1s linear infinite;
+}
+.icon-hibernate-loader-style{
+    animation: spin4 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {color: #F63C51}
+    /*25% {color: #393939}*/
+    50% {color: #393939}
+    75% {color: #393939}
+    100% {color: #393939}
+}
+
+@keyframes spin2 {
+    0% {color: #393939}
+    50% {color: #17A2B8}
+    75% {color: #393939}
+    100% {color: #393939}
+}
+
+@keyframes spin3 {
+    0% {color: #393939}
+    50% {color: #393939}
+    75% {color: #393939}
+    100% {color: #28A745}
+}
+
+@keyframes spin4 {
+    0% {color: #393939}
+    50% {color: #393939}
+    75% {color: #FFD500}
+    100% {color: #393939}
+}

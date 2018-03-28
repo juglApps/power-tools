@@ -5,26 +5,41 @@ var actionInProgress = null;
 
 exports.execAction = function (callback, time, action, saveSettings, nameSetting, index) {
     console.log('Apagando el equipo');
-    switch (action) {
-        case 'shutdown':
-            execute(callback, time, 'shutdown -s -f -t 0');
-            break;
-        case 'reboot':
-            execute(callback, time, 'shutdown -r -f -t 0');
-            break;
-        case 'signOut':
-            execute(callback, time, 'shutdown -L -f -t 0');
-            break;
-        case 'hibernate':
-            execute(callback, time, 'shutdown -h -f -t 0');
-            break;
-    }
-
     if (saveSettings) {
         saveFileSettings(time, nameSetting, action, index, function (out) {
             callback(out);
+            switch (action) {
+                case 'shutdown':
+                    execute(callback, time, 'shutdown -s -f -t 0');
+                    break;
+                case 'reboot':
+                    execute(callback, time, 'shutdown -r -f -t 0');
+                    break;
+                case 'signOut':
+                    execute(callback, time, 'shutdown -L -f');
+                    break;
+                case 'hibernate':
+                    execute(callback, time, 'shutdown -h -f -t 0');
+                    break;
+            }
         });
+    }else{
+        switch (action) {
+            case 'shutdown':
+                execute(callback, time, 'shutdown -s -f -t 0');
+                break;
+            case 'reboot':
+                execute(callback, time, 'shutdown -r -f -t 0');
+                break;
+            case 'signOut':
+                execute(callback, time, 'shutdown -L -f');
+                break;
+            case 'hibernate':
+                execute(callback, time, 'shutdown -h -f -t 0');
+                break;
+        }
     }
+
 };
 
 exports.cancelAction = function () {
@@ -38,7 +53,7 @@ exports.deleteSetting = function (file) {
 };
 
 function execute(callback, time, action) {
-    if (time !== 0) {
+    if (time > 0) {
         actionInProgress = setTimeout(function () {
             exec(action, function (error, stdout, stderr) {
                 callback(stdout);
@@ -52,25 +67,25 @@ function execute(callback, time, action) {
 }
 
 function saveFileSettings(time, nameSetting, action, index, callback) {
-    var JsonFile = getJsonFile();
-    var path = './settingsSaved.json';
-    var fileArray = JsonFile ? JsonFile : [];
-    if(index === 0 || index > 0){
-        fileArray[index] = {
-            'name': nameSetting,
-            'time': time,
-            'action': action
+        var JsonFile = getJsonFile();
+        var path = './settingsSaved.json';
+        var fileArray = JsonFile ? JsonFile : [];
+        if(index === 0 || index > 0){
+            fileArray[index] = {
+                'name': nameSetting,
+                'time': time,
+                'action': action
+            }
+        }else{
+            fileArray.push({
+                'name': nameSetting,
+                'time': time,
+                'action': action
+            });
         }
-    }else{
-        fileArray.push({
-            'name': nameSetting,
-            'time': time,
-            'action': action
-        });
-    }
 
-    fs.writeFile(path, JSON.stringify(fileArray));
-    callback('Done');
+        fs.writeFile(path, JSON.stringify(fileArray));
+        callback('Done');
 }
 
 function getJsonFile() {

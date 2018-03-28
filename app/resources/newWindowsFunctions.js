@@ -16,7 +16,8 @@ exports.openCountDown = function () {
         transparent: true,
         backgroundColor: '#222222',
         show: false,
-        fullscreen: false
+        fullscreen: false,
+        icon: path.join(__dirname, '../../public/img/icon_64x64.png')
     });
     win.loadURL(url.format({
         pathname: path.join(__dirname, '../../public/views/countDown.html'),

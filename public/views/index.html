@@ -8,11 +8,26 @@
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div id="closeMinContainer"  style="padding: 2%;display: flex;justify-content: space-between;width: 100%;color: white">
+    <div class="loader">
+        <div style="width: 50%; float: left">
+            <i class="fa fa-power-off icon-off-loader-style"></i>
+        </div>
+        <div style="width: 50%; float: left">
+            <i class="fa fa-sync-alt icon-reboot-loader-style"></i>
+        </div>
+        <div style="width: 50%; float: left">
+            <i class="fa fa-sign-out-alt icon-signOut-loader-style"></i>
+        </div>
+        <div style="width: 50%; float: left">
+            <i class="fa fa-snowflake icon-hibernate-loader-style"></i>
+        </div>
+    </div>
+    <div id="closeMinContainer"  style="padding: 2%;display: none;justify-content: space-between;width: 100%;color: white;">
         <a href="javascript:;" style="text-decoration: none" id="minimizeIcon"><i class="fa fa-minus"></i></a>
         <a href="javascript:;" style="text-decoration: none" id="closeIcon"><i class="fa fa-times"></i></a>
     </div>
-    <div id="full-container" class="col-md-12 text-center" style="margin-top: 4%;">
+
+    <div id="full-container" class="col-md-12 text-center" style="display: none;margin-top: 4%;">
         <h3 style="font-size: 35px; margin-bottom: 40px">Choose the action</h3>
         <div class="col-md-12">
             <div class="actions-container" id="offContainer" onmouseover="check($(this))" onclick="setAction('offContainer')">
@@ -41,7 +56,7 @@
             </div>
             <div class="actions-container" id="hibernateContainer" onclick="setAction('hibernateContainer')">
                 <div class="col-md-12">
-                    <i class="fa fa-sign-out-alt icon-hibernate-style"></i>
+                    <i class="fa fa-snowflake icon-hibernate-style"></i>
                 </div>
                 <div class="col-md-12 text-hibernate-style">
                     Hibernate
@@ -49,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12" id="tableContainer"></div>
+    <div class="col-md-12" id="tableContainer" style="display: none"></div>
     <div id="modalContent"></div>
     <!--<div id="rebootContent"></div>-->
     <!--JS Files-->

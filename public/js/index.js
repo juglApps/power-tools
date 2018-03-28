@@ -12,6 +12,12 @@ $(document).ready(function () {
     $('#modalContent').load('./action.html');
     localStorage.setItem('activeCount', 'noActivated');
     getSettingsSaved();
+    setTimeout(function () {
+        $('#closeMinContainer').css('display', 'flex');
+        $('#full-container').fadeIn();
+        $('#tableContainer').fadeIn();
+        $('.loader').hide();
+    }, 3000);
 });
 
 $('#closeIcon').click(function () {

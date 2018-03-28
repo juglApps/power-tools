@@ -65,8 +65,10 @@ function shutdownConfirmClick(index) {
         localStorage.setItem('action', action);
         localStorage.setItem('activeCount', 'activated');
 
-        newWindows.openCountDown();
-        remote.BrowserWindow.getFocusedWindow().close();
+        if(time > 0){
+            newWindows.openCountDown();
+            remote.BrowserWindow.getFocusedWindow().close();
+        }
 
         methods.execAction(function (out) {
             if(out === 'Done'){

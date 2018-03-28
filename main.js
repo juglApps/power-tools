@@ -15,7 +15,8 @@ function createWindow() {
     indexWin = new BrowserWindow({
         backgroundColor: '#222222', with: 600, height: 600, show: false,frame: false,
         resizable: false,
-        fullscreen: false
+        fullscreen: false,
+        icon: path.join(__dirname, '/public/img/icon_64x64.png')
     });
     indexWin.loadURL(url.format({
         pathname: path.join(__dirname, '/public/views/index.html'),

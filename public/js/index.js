@@ -39,7 +39,7 @@ function getSettingsSaved() {
             $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
         }
     }else{
-        $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
+        $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center" style="border: 0">No settings saved</div>');
     }
 }
 
@@ -88,7 +88,7 @@ function deleteAction(index){
         if (file.length > 0) {
             $('#tableContainer').html(methods.loadSettingsSavedTable(file));
         } else {
-            $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center">No settings saved</div>');
+            $('#tableContainer').html('<h3>Settings Saved:</h3><div class="alert alert-light text-center" style="border: 0">No settings saved</div>');
         }
     }
 }

@@ -8,6 +8,6 @@ Install:
   - npm install
   - bower install
  
- ![Captura](https://preview.ibb.co/cuTa98/pcb1.png)
- ![Captura](https://preview.ibb.co/eCV0bo/pcb2.png" alt="pcb2)
- ![Captura](https://preview.ibb.co/kBb6Go/pcb3.png" alt="pcb3)
+ ![Captura](https://preview.ibb.co/cuTa98/pcb1.png);
+ ![Captura](https://preview.ibb.co/eCV0bo/pcb2.png" alt="pcb2);
+ ![Captura](https://preview.ibb.co/kBb6Go/pcb3.png" alt="pcb3);

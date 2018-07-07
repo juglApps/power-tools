@@ -2,11 +2,13 @@ Electron framework is necessary for run the project.
 
 Visit on [electron](https://electronjs.org/)
 
-Install:
+## Install:
   - git clone https://github.com/juglApps/power-tools.git
   - cd power-tools
   - npm install
   - bower install
+## Run:
+  - electron main.js
  
  [![Captura](https://preview.ibb.co/cuTa98/pcb1.png)]
  
